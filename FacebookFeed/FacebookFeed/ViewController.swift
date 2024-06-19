@@ -27,8 +27,8 @@ class ViewController: UICollectionViewController,UICollectionViewDelegateFlowLay
         
         let postMark = Post(name: "Mark Zuckerberg", statusText: "Meanwhile the beast turned the other way down")
         
-        let postSteve = Post(name: "Steve Jobs", statusText: "The buttonStackView is constrained to be at the bottom of the cell, ensuring it stretches horizontally and has a height of 44 points.")
-
+        let postSteve = Post(name: "Steve Jobs", statusText: "The buttonStackView is constrained to be at the bottom of the cell, ensuring it stretches horizontally and has a height of 44 points. The buttonStackView is constrained to be at the bottom of the cell, ensuring it stretches horizontally and has a height of 44 points.")
+        
         
         posts.append(postMark)
         posts.append(postSteve)
@@ -47,21 +47,28 @@ class ViewController: UICollectionViewController,UICollectionViewDelegateFlowLay
     }
     // UICollectionViewDelegateFlowLayout method
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-           let post = posts[indexPath.item]
-           
-           // Calculate the height for status text
-           let statusTextHeight = post.statusText.height(withConstrainedWidth: view.bounds.width - 16, font: UIFont.systemFont(ofSize: 14))
-           
-           // Base height calculation
-           let baseHeight: CGFloat = 8 + 44 + 8 + statusTextHeight + 8 + 200 + 8 + 24 + 8 + 3 + 8 + 44 + 8
-           
-           return CGSize(width: view.bounds.width, height: baseHeight)
-       }
+        let post = posts[indexPath.item]
+        
+        let nameLabelHeight: CGFloat = 44 // Fixed height
+        let profileImageHeight: CGFloat = 44 // Fixed height
+        
+        let statusTextHeight = post.statusText.height(withConstrainedWidth: view.frame.width - 16, font: UIFont.systemFont(ofSize: 14))
+        
+        
+        let statusImageHeight: CGFloat = 200 // Fixed height
+        let likesCommentsLabelHeight: CGFloat = 24 // Fixed height
+        let dividerLineHeight: CGFloat = 3 // Fixed height
+        let buttonStackViewHeight: CGFloat = 44 // Fixed height
+        
+        let totalHeight = nameLabelHeight + profileImageHeight + statusTextHeight + statusImageHeight + likesCommentsLabelHeight + dividerLineHeight + buttonStackViewHeight + 64 // 64 for padding and spacing
+        
+        return CGSize(width: view.frame.width, height: totalHeight)
+    }
 }
 
 class FeedCell: UICollectionViewCell {
     var post: Post? {
-        didSet{
+        didSet {
             if let name = post?.name {
                 let attributedText = NSMutableAttributedString(string: name, attributes: [.font: UIFont.boldSystemFont(ofSize: 14)])
                 attributedText.append(NSMutableAttributedString(string: "\nDecember 18 * San Francisco *", attributes: [.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor(red: 155/255, green: 161/255, blue: 171/255, alpha: 1)]))
@@ -72,32 +79,34 @@ class FeedCell: UICollectionViewCell {
                 nameLabel.attributedText = attributedText
             }
             statusTextView.text = post?.statusText
-           
-            
         }
     }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 2
-       
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.numberOfLines = 0
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let statusTextView: UITextView = {
         let textView = UITextView()
-        textView.text = "Meanwhile the beast turned to the other side"
         textView.font = UIFont.systemFont(ofSize: 14)
-        textView.backgroundColor = UIColor.green
+        textView.isScrollEnabled = false
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
+    
     let statusImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "lebron-james")
@@ -106,8 +115,7 @@ class FeedCell: UICollectionViewCell {
         return imageView
     }()
     
-    
-    let profileImage: UIImageView = {
+    let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "lebron-james")
         imageView.contentMode = .scaleAspectFit
@@ -124,15 +132,17 @@ class FeedCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
     let dividerLineView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.rgb(red: 226, green: 228, blue: 232)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    let likeButton: UIButton = buttonForTitle(title: "Like", imageName: "Like")
-    let commentButton = buttonForTitle(title: "Comment", imageName: "Comment")
-    let shareButton = buttonForTitle(title: "share", imageName: "share")
+    
+    let likeButton = FeedCell.buttonForTitle(title: "Like", imageName: "like")
+    let commentButton = FeedCell.buttonForTitle(title: "Comment", imageName: "comment")
+    let shareButton = FeedCell.buttonForTitle(title: "Share", imageName: "share")
     
     let buttonStackView: UIStackView = {
         let stackView = UIStackView()
@@ -141,6 +151,7 @@ class FeedCell: UICollectionViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    
     static func buttonForTitle(title: String, imageName: String) -> UIButton {
         let button = UIButton()
         button.setTitle(title, for: .normal)
@@ -150,69 +161,50 @@ class FeedCell: UICollectionViewCell {
         return button
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
     func setupViews() {
-        backgroundColor = UIColor.white
+        backgroundColor = .white
+        
         addSubview(nameLabel)
-        addSubview(profileImage)
+        addSubview(profileImageView)
         addSubview(statusTextView)
         addSubview(statusImageView)
         addSubview(likesCommentsLabel)
         addSubview(dividerLineView)
-        addSubview(likeButton)
         buttonStackView.addArrangedSubview(likeButton)
         buttonStackView.addArrangedSubview(commentButton)
         buttonStackView.addArrangedSubview(shareButton)
         addSubview(buttonStackView)
         
-        // Add constraint for profile image view
         NSLayoutConstraint.activate([
-            profileImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
-            profileImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
-            profileImage.widthAnchor.constraint(equalToConstant: 44),
-            profileImage.heightAnchor.constraint(equalToConstant: 44)
-        ])
-        
-        // Add constraint for name label
-        NSLayoutConstraint.activate([
-            nameLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 8),
-            nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 8)
-        ])
-        
-        // Add constraint for status text view
-        NSLayoutConstraint.activate([
+            profileImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
+            profileImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
+            profileImageView.widthAnchor.constraint(equalToConstant: 44),
+            profileImageView.heightAnchor.constraint(equalToConstant: 44),
+            
+            nameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 8),
+            nameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
+            nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
+            
             statusTextView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
             statusTextView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
-            statusTextView.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 4),
-            //            statusTextView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8)
-        ])
-        NSLayoutConstraint.activate([
+            statusTextView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 4),
+            
             statusImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
             statusImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
             statusImageView.topAnchor.constraint(equalTo: statusTextView.bottomAnchor, constant: 4),
-            statusImageView.heightAnchor.constraint(equalToConstant: 200)
-
-        ])
-        NSLayoutConstraint.activate([
+            statusImageView.heightAnchor.constraint(equalToConstant: 200),
+            
             likesCommentsLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
             likesCommentsLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
             likesCommentsLabel.topAnchor.constraint(equalTo: statusImageView.bottomAnchor, constant: 8),
-            likesCommentsLabel.heightAnchor.constraint(equalToConstant: 24)
-        ])
-        NSLayoutConstraint.activate([
+            
             dividerLineView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
             dividerLineView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
-            dividerLineView.heightAnchor.constraint(equalToConstant: 3),
-            dividerLineView.topAnchor.constraint(equalTo: likesCommentsLabel.bottomAnchor, constant: 8)
-        ])
-
-        NSLayoutConstraint.activate([
-            buttonStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
-            buttonStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
+            dividerLineView.topAnchor.constraint(equalTo: likesCommentsLabel.bottomAnchor, constant: 8),
+            dividerLineView.heightAnchor.constraint(equalToConstant: 1),
+            
+            buttonStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            buttonStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             buttonStackView.topAnchor.constraint(equalTo: dividerLineView.bottomAnchor, constant: 8),
             buttonStackView.heightAnchor.constraint(equalToConstant: 44),
             buttonStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8)
@@ -220,6 +212,7 @@ class FeedCell: UICollectionViewCell {
         
     }
 }
+
 extension UIColor{
     static func rgb(red:CGFloat, green:CGFloat, blue:CGFloat) -> UIColor {
         return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1.0)

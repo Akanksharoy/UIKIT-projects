@@ -7,27 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		221D7EA42C02401200067062 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D7EA32C02401200067062 /* AppDelegate.swift */; };
-		221D7EA62C02401200067062 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D7EA52C02401200067062 /* SceneDelegate.swift */; };
-		221D7EA82C02401200067062 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D7EA72C02401200067062 /* ViewController.swift */; };
-		221D7EAD2C02401400067062 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 221D7EAC2C02401400067062 /* Assets.xcassets */; };
-		221D7EB02C02401400067062 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221D7EAE2C02401400067062 /* LaunchScreen.storyboard */; };
-		223C69EF2C1ED00400D61D8F /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C69EE2C1ED00400D61D8F /* CustomTabBarController.swift */; };
+		2245DDB52C22965900F23725 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2245DDB42C22965900F23725 /* AppDelegate.swift */; };
+		2245DDB72C22965900F23725 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2245DDB62C22965900F23725 /* SceneDelegate.swift */; };
+		2245DDB92C22965900F23725 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2245DDB82C22965900F23725 /* ViewController.swift */; };
+		2245DDBC2C22965900F23725 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2245DDBA2C22965900F23725 /* Main.storyboard */; };
+		2245DDBE2C22965B00F23725 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2245DDBD2C22965B00F23725 /* Assets.xcassets */; };
+		2245DDC12C22965B00F23725 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2245DDBF2C22965B00F23725 /* LaunchScreen.storyboard */; };
+		2245DDC92C22CDDA00F23725 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2245DDC82C22CDDA00F23725 /* BaseTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		221D7EA02C02401200067062 /* FacebookFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FacebookFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		221D7EA32C02401200067062 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		221D7EA52C02401200067062 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		221D7EA72C02401200067062 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		221D7EAC2C02401400067062 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		221D7EAF2C02401400067062 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		221D7EB12C02401400067062 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		223C69EE2C1ED00400D61D8F /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		2245DDB12C22965900F23725 /* AppstoreJsonApis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppstoreJsonApis.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2245DDB42C22965900F23725 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2245DDB62C22965900F23725 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		2245DDB82C22965900F23725 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2245DDBB2C22965900F23725 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2245DDBD2C22965B00F23725 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2245DDC02C22965B00F23725 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2245DDC22C22965B00F23725 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2245DDC82C22CDDA00F23725 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		221D7E9D2C02401200067062 /* Frameworks */ = {
+		2245DDAE2C22965900F23725 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -37,72 +39,73 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		221D7E972C02401200067062 = {
+		2245DDA82C22965900F23725 = {
 			isa = PBXGroup;
 			children = (
-				221D7EA22C02401200067062 /* FacebookFeed */,
-				221D7EA12C02401200067062 /* Products */,
+				2245DDB32C22965900F23725 /* AppstoreJsonApis */,
+				2245DDB22C22965900F23725 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		221D7EA12C02401200067062 /* Products */ = {
+		2245DDB22C22965900F23725 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				221D7EA02C02401200067062 /* FacebookFeed.app */,
+				2245DDB12C22965900F23725 /* AppstoreJsonApis.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		221D7EA22C02401200067062 /* FacebookFeed */ = {
+		2245DDB32C22965900F23725 /* AppstoreJsonApis */ = {
 			isa = PBXGroup;
 			children = (
-				221D7EA32C02401200067062 /* AppDelegate.swift */,
-				221D7EA52C02401200067062 /* SceneDelegate.swift */,
-				221D7EA72C02401200067062 /* ViewController.swift */,
-				221D7EAC2C02401400067062 /* Assets.xcassets */,
-				221D7EAE2C02401400067062 /* LaunchScreen.storyboard */,
-				221D7EB12C02401400067062 /* Info.plist */,
-				223C69EE2C1ED00400D61D8F /* CustomTabBarController.swift */,
+				2245DDB42C22965900F23725 /* AppDelegate.swift */,
+				2245DDB62C22965900F23725 /* SceneDelegate.swift */,
+				2245DDB82C22965900F23725 /* ViewController.swift */,
+				2245DDBA2C22965900F23725 /* Main.storyboard */,
+				2245DDBD2C22965B00F23725 /* Assets.xcassets */,
+				2245DDBF2C22965B00F23725 /* LaunchScreen.storyboard */,
+				2245DDC22C22965B00F23725 /* Info.plist */,
+				2245DDC82C22CDDA00F23725 /* BaseTabBarController.swift */,
 			);
-			path = FacebookFeed;
+			path = AppstoreJsonApis;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		221D7E9F2C02401200067062 /* FacebookFeed */ = {
+		2245DDB02C22965900F23725 /* AppstoreJsonApis */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 221D7EB42C02401400067062 /* Build configuration list for PBXNativeTarget "FacebookFeed" */;
+			buildConfigurationList = 2245DDC52C22965B00F23725 /* Build configuration list for PBXNativeTarget "AppstoreJsonApis" */;
 			buildPhases = (
-				221D7E9C2C02401200067062 /* Sources */,
-				221D7E9D2C02401200067062 /* Frameworks */,
-				221D7E9E2C02401200067062 /* Resources */,
+				2245DDAD2C22965900F23725 /* Sources */,
+				2245DDAE2C22965900F23725 /* Frameworks */,
+				2245DDAF2C22965900F23725 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = FacebookFeed;
-			productName = FacebookFeed;
-			productReference = 221D7EA02C02401200067062 /* FacebookFeed.app */;
+			name = AppstoreJsonApis;
+			productName = AppstoreJsonApis;
+			productReference = 2245DDB12C22965900F23725 /* AppstoreJsonApis.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		221D7E982C02401200067062 /* Project object */ = {
+		2245DDA92C22965900F23725 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1510;
 				LastUpgradeCheck = 1510;
 				TargetAttributes = {
-					221D7E9F2C02401200067062 = {
+					2245DDB02C22965900F23725 = {
 						CreatedOnToolsVersion = 15.1;
 					};
 				};
 			};
-			buildConfigurationList = 221D7E9B2C02401200067062 /* Build configuration list for PBXProject "FacebookFeed" */;
+			buildConfigurationList = 2245DDAC2C22965900F23725 /* Build configuration list for PBXProject "AppstoreJsonApis" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -110,47 +113,56 @@
 				en,
 				Base,
 			);
-			mainGroup = 221D7E972C02401200067062;
-			productRefGroup = 221D7EA12C02401200067062 /* Products */;
+			mainGroup = 2245DDA82C22965900F23725;
+			productRefGroup = 2245DDB22C22965900F23725 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				221D7E9F2C02401200067062 /* FacebookFeed */,
+				2245DDB02C22965900F23725 /* AppstoreJsonApis */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		221D7E9E2C02401200067062 /* Resources */ = {
+		2245DDAF2C22965900F23725 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				221D7EB02C02401400067062 /* LaunchScreen.storyboard in Resources */,
-				221D7EAD2C02401400067062 /* Assets.xcassets in Resources */,
+				2245DDC12C22965B00F23725 /* LaunchScreen.storyboard in Resources */,
+				2245DDBE2C22965B00F23725 /* Assets.xcassets in Resources */,
+				2245DDBC2C22965900F23725 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		221D7E9C2C02401200067062 /* Sources */ = {
+		2245DDAD2C22965900F23725 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				221D7EA82C02401200067062 /* ViewController.swift in Sources */,
-				221D7EA42C02401200067062 /* AppDelegate.swift in Sources */,
-				223C69EF2C1ED00400D61D8F /* CustomTabBarController.swift in Sources */,
-				221D7EA62C02401200067062 /* SceneDelegate.swift in Sources */,
+				2245DDC92C22CDDA00F23725 /* BaseTabBarController.swift in Sources */,
+				2245DDB92C22965900F23725 /* ViewController.swift in Sources */,
+				2245DDB52C22965900F23725 /* AppDelegate.swift in Sources */,
+				2245DDB72C22965900F23725 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		221D7EAE2C02401400067062 /* LaunchScreen.storyboard */ = {
+		2245DDBA2C22965900F23725 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				221D7EAF2C02401400067062 /* Base */,
+				2245DDBB2C22965900F23725 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2245DDBF2C22965B00F23725 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2245DDC02C22965B00F23725 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -158,7 +170,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		221D7EB22C02401400067062 /* Debug */ = {
+		2245DDC32C22965B00F23725 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -221,7 +233,7 @@
 			};
 			name = Debug;
 		};
-		221D7EB32C02401400067062 /* Release */ = {
+		2245DDC42C22965B00F23725 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -277,7 +289,7 @@
 			};
 			name = Release;
 		};
-		221D7EB52C02401400067062 /* Debug */ = {
+		2245DDC62C22965B00F23725 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -285,9 +297,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FacebookFeed/Info.plist;
+				INFOPLIST_FILE = AppstoreJsonApis/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -295,7 +308,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.practice.FacebookFeed;
+				PRODUCT_BUNDLE_IDENTIFIER = com.practice.AppstoreJsonApis;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -303,7 +316,7 @@
 			};
 			name = Debug;
 		};
-		221D7EB62C02401400067062 /* Release */ = {
+		2245DDC72C22965B00F23725 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -311,9 +324,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FacebookFeed/Info.plist;
+				INFOPLIST_FILE = AppstoreJsonApis/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -321,7 +335,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.practice.FacebookFeed;
+				PRODUCT_BUNDLE_IDENTIFIER = com.practice.AppstoreJsonApis;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -332,25 +346,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		221D7E9B2C02401200067062 /* Build configuration list for PBXProject "FacebookFeed" */ = {
+		2245DDAC2C22965900F23725 /* Build configuration list for PBXProject "AppstoreJsonApis" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				221D7EB22C02401400067062 /* Debug */,
-				221D7EB32C02401400067062 /* Release */,
+				2245DDC32C22965B00F23725 /* Debug */,
+				2245DDC42C22965B00F23725 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		221D7EB42C02401400067062 /* Build configuration list for PBXNativeTarget "FacebookFeed" */ = {
+		2245DDC52C22965B00F23725 /* Build configuration list for PBXNativeTarget "AppstoreJsonApis" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				221D7EB52C02401400067062 /* Debug */,
-				221D7EB62C02401400067062 /* Release */,
+				2245DDC62C22965B00F23725 /* Debug */,
+				2245DDC72C22965B00F23725 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 221D7E982C02401200067062 /* Project object */;
+	rootObject = 2245DDA92C22965900F23725 /* Project object */;
 }
