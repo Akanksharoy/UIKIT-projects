@@ -12,4 +12,7 @@ struct Apps: Decodable {
     let description: String
     let primaryGenreName: String
     let trackName: String
+    let averageUserRating: Float?
+    let screenshotUrls: [String]
+    
 }

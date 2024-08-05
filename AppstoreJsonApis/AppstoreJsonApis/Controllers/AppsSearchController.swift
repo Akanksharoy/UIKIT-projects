@@ -8,6 +8,7 @@
 import UIKit
 class AppsSearchController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     let iTunesServiceInstance:ITunesServiceProtocol = iTunesService()
+    fileprivate var apps:[Apps] = []
     fileprivate let cellID = "id1234"
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,11 +25,14 @@ class AppsSearchController: UICollectionViewController, UICollectionViewDelegate
         fatalError("init(coder:) has not been implemented")
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return apps.count
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! SearchResultCollectionViewCell
-        cell.nameLabel.text = "HERE IS MY APP NAME"
+        let appResult = apps[indexPath.item]
+        cell.nameLabel.text = appResult.trackName
+        cell.categoryLabel.text = appResult.primaryGenreName
+        cell.ratingsLabel.text = "Ratings: \(appResult.averageUserRating ?? 0)"
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -38,8 +42,9 @@ class AppsSearchController: UICollectionViewController, UICollectionViewDelegate
         iTunesServiceInstance.fetchITunes { result in
             switch result {
             case .success(let apps):
-                for app in apps {
-                    print("App Name: \(app.primaryGenreName), Description: \(app.trackName)")
+                self.apps = apps
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
                 }
             case .failure(let error):
                 print("Failed to fetch apps:", error)

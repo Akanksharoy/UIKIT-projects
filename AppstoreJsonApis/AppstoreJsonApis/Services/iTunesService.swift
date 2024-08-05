@@ -14,7 +14,11 @@ class iTunesService: BaseService, ITunesServiceProtocol {
 
     func fetchITunes(completion: @escaping (Result<[Apps], Error>) -> Void) {
         let urlString = "https://itunes.apple.com/search?term=instagram&entity=software"
-        fetchData(from: urlString) { result in
+        guard let url = URL(string: urlString) else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 400, userInfo: nil)))
+            return
+        }
+        fetchData(from: url) { result in
             switch result {
             case .success(let data):
                 do {
