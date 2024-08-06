@@ -9,28 +9,37 @@ import UIKit
 import SDWebImage
 class AppsSearchController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     private let viewModel = AppsSearchViewModel()
-
+    
     fileprivate var apps:[Apps] = []
     fileprivate let cellID = "id1234"
+    init() {
+        let layout = UICollectionViewFlowLayout()
+        super.init(collectionViewLayout: layout)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
-           super.viewDidLoad()
-           
-           collectionView.backgroundColor = .white
-           collectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
-           
-           viewModel.onDataFetched = { [weak self] in
-               DispatchQueue.main.async {
-                   self?.collectionView.reloadData()
-               }
-           }
-           
-           viewModel.onError = { error in
-               // Handle error (e.g., show an alert)
-               print("Failed to fetch apps:", error)
-           }
-           
-           viewModel.fetchApps(searchTerm: "instagram")
-       }
+        super.viewDidLoad()
+        
+        collectionView.backgroundColor = .white
+        collectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
+        
+        viewModel.onDataFetched = { [weak self] in
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+            }
+        }
+        
+        viewModel.onError = { error in
+            // Handle error (e.g., show an alert)
+            print("Failed to fetch apps:", error)
+        }
+        
+        viewModel.fetchApps(searchTerm: "instagram")
+    }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.numberOfItemsInSection()
