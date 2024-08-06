@@ -8,11 +8,11 @@ struct SearchResult:Decodable {
     let resultCount: Int
     let results: [Apps]
 }
+
 struct Apps: Decodable {
-    let description: String
     let primaryGenreName: String
     let trackName: String
     let averageUserRating: Float?
     let screenshotUrls: [String]
-    
+    let artworkUrl100: String // app icon
 }

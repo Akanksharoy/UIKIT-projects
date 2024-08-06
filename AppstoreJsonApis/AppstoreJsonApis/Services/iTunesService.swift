@@ -7,15 +7,15 @@
 import Foundation
 
 protocol ITunesServiceProtocol {
-    func fetchITunes(completion: @escaping (Result<[Apps], Error>) -> Void)
+    func fetchITunes(searchTerm: String, completion: @escaping (Result<[Apps], Error>) -> Void)
 }
 
-class iTunesService: BaseService, ITunesServiceProtocol {
+class ITunesService: BaseService, ITunesServiceProtocol {
 
-    func fetchITunes(completion: @escaping (Result<[Apps], Error>) -> Void) {
-        let urlString = "https://itunes.apple.com/search?term=instagram&entity=software"
+    func fetchITunes(searchTerm: String, completion: @escaping (Result<[Apps], Error>) -> Void) {
+        let urlString = "https://itunes.apple.com/search?term=\(searchTerm)&entity=software"
         guard let url = URL(string: urlString) else {
-            completion(.failure(NSError(domain: "Invalid URL", code: 400, userInfo: nil)))
+            completion(.failure(ServiceError.invalidURL))
             return
         }
         fetchData(from: url) { result in
@@ -25,7 +25,7 @@ class iTunesService: BaseService, ITunesServiceProtocol {
                     let response = try JSONDecoder().decode(SearchResult.self, from: data)
                     completion(.success(response.results))
                 } catch {
-                    completion(.failure(error))
+                    completion(.failure(ServiceError.decodingFailed(error)))
                 }
             case .failure(let error):
                 completion(.failure(error))
@@ -34,3 +34,7 @@ class iTunesService: BaseService, ITunesServiceProtocol {
     }
 }
 
+enum ServiceError: Error {
+    case invalidURL
+    case decodingFailed(Error)
+}
