@@ -15,14 +15,13 @@ class BaseTabBarController: UITabBarController {
         let todayViewController = UIViewController()
         let todayNavBarController = createNavController(viewController: todayViewController, title: "Today", tabBarTitle: "Today", imageName: "today_icon")
         
-        let appsViewController = UIViewController()
-        let appsNavBarController = createNavController(viewController: appsViewController, title: "Apps", tabBarTitle: "Apps", imageName: "apps")
+        let appsNavBarController = createNavController(viewController: AppsController(), title: "Apps", tabBarTitle: "Apps", imageName: "apps")
         
         let searchNavBarController = createNavController(viewController: AppsSearchController(), title: "Search", tabBarTitle: "Search", imageName: "search")
         
-        viewControllers = [searchNavBarController,todayNavBarController, appsNavBarController]
+        viewControllers = [appsNavBarController, searchNavBarController, todayNavBarController]
     }
-
+    
     func createNavController(viewController: UIViewController, title: String, tabBarTitle: String, imageName: String) -> UINavigationController {
         viewController.view.backgroundColor = .white
         viewController.navigationItem.title = title
@@ -35,6 +34,6 @@ class BaseTabBarController: UITabBarController {
         
         return navController
     }
-
-
+    
+    
 }
