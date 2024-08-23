@@ -5,9 +5,19 @@
 //  Created by Animesh on 14/08/24.
 //
 import UIKit
-
+import Foundation
 class AppsHorizontalController: BaseListController, UICollectionViewDelegateFlowLayout {
     var cellID = "horizontalCell"
+    
+    var appGroup: AppsGroup? {
+        didSet {
+            if appGroup != nil {
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,11 +29,15 @@ class AppsHorizontalController: BaseListController, UICollectionViewDelegateFlow
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return appGroup?.feed.results.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! AppRowCell
+        let app = appGroup?.feed.results[indexPath.item]
+        cell.nameLabel.text = app?.name
+        cell.companyLabel.text = app?.artistName
+        cell.imageView.sd_setImage(with: URL(string: app?.artworkUrl100 ?? ""))
         return cell
     }
     
