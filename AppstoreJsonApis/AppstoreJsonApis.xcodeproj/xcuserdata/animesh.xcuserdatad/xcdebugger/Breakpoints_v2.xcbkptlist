@@ -3,4 +3,70 @@
    uuid = "C07673FA-55FF-430F-B1F9-9C5AF6B88B18"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0E0E36A6-E210-4C46-97B3-D271C7E202BD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AppstoreJsonApis/Controllers/Apps/AppsPageController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "fetchGames()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "96FC70C6-BECF-4A11-9BE1-C42A1EBC839D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AppstoreJsonApis/Controllers/Apps/AppsPageController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "collectionView(_:cellForItemAt:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "96FC70C6-BECF-4A11-9BE1-C42A1EBC839D - a52df456bf2bcdea"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AppstoreJsonApis.AppsPageController.collectionView(_: __C.UICollectionView, cellForItemAt: Foundation.IndexPath) -&gt; __C.UICollectionViewCell"
+                  moduleName = "AppstoreJsonApis"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/animesh/Documents/UIKIT%20projects/AppstoreJsonApis/AppstoreJsonApis/Controllers/Apps/AppsPageController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "400">
+               </Location>
+               <Location
+                  uuid = "96FC70C6-BECF-4A11-9BE1-C42A1EBC839D - a52df456bf2bcdea"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AppstoreJsonApis.AppsPageController.collectionView(_: __C.UICollectionView, cellForItemAt: Foundation.IndexPath) -&gt; __C.UICollectionViewCell"
+                  moduleName = "AppstoreJsonApis"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/animesh/Documents/UIKIT%20projects/AppstoreJsonApis/AppstoreJsonApis/Controllers/Apps/AppsPageController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "424">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
