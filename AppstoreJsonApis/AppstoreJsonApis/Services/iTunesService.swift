@@ -11,6 +11,7 @@ protocol ITunesServiceProtocol {
 }
 protocol ITunesGameServiceProtocol {
     func fetchGames(from urlString: String,completion: @escaping (Result<AppsGroup, Error>) -> Void)
+    func fetchSocialApps(completion: @escaping (Result<[SocialApp], Error>) -> Void)
 }
 class ITunesService: BaseService, ITunesServiceProtocol {
     
@@ -36,7 +37,7 @@ class ITunesService: BaseService, ITunesServiceProtocol {
     }
    
 }
-//"https://rss.applemarketingtools.com/api/v2/us/apps/top-free/25/apps.json
+//https://rss.applemarketingtools.com/api/v2/us/apps/top-free/25/apps.json
 //https://rss.applemarketingtools.com/api/v2/us/music/most-played/25/albums.json
 //https://rss.applemarketingtools.com/api/v2/us/podcasts/top/10/podcasts.json
 class ITunesGameService: BaseService, ITunesGameServiceProtocol {
@@ -53,8 +54,26 @@ class ITunesGameService: BaseService, ITunesGameServiceProtocol {
             case .success(let data):
                 do {
                     let appGroup = try JSONDecoder().decode(AppsGroup.self, from: data)
-                    print(appGroup.feed.results.forEach({ print($0.name) }))
+//                    print(appGroup.feed.results.forEach({ print($0.name) }))
                     completion(.success(appGroup))
+                } catch {
+                    print("JSON decoding failed")
+                    completion(.failure(ServiceError.decodingFailed(error)))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    func fetchSocialApps(completion: @escaping (Result<[SocialApp], Error>) -> Void) {
+        var urlString = "https://api.letsbuildthatapp.com/appstore/social"
+        guard let url = URL(string: urlString) else { return }
+        fetchData(from: url) { result in
+            switch result {
+            case .success(let data):
+                do {
+                    let socialApp = try JSONDecoder().decode([SocialApp].self, from: data)
+                    completion(.success(socialApp))
                 } catch {
                     print("JSON decoding failed")
                     completion(.failure(ServiceError.decodingFailed(error)))
@@ -66,29 +85,29 @@ class ITunesGameService: BaseService, ITunesGameServiceProtocol {
     }
 
 }
-protocol SocialAppProtocol {
-    func fetchSocialApps(completion: @escaping (Result<SocialApp, Error>) -> Void)
-}
-class SocialAppService: BaseService, SocialAppProtocol {
-    func fetchSocialApps(completion: @escaping (Result<SocialApp, Error>) -> Void) {
-        var urlString = "https://api.letsbuildthatapp.com/appstore/social"
-        guard let url = URL(string: urlString) else { return }
-        fetchData(from: url) { result in
-            switch result {
-            case .success(let data):
-                do {
-                    let socialApp = try JSONDecoder().decode(SocialApp.self, from: data)
-                    completion(.success(socialApp))
-                } catch {
-                    print("JSON decoding failed")
-                    completion(.failure(ServiceError.decodingFailed(error)))
-                }
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-}
+//protocol SocialAppProtocol {
+//    func fetchSocialApps(completion: @escaping (Result<SocialApp, Error>) -> Void)
+//}
+//class SocialAppService: BaseService, SocialAppProtocol {
+//    func fetchSocialApps(completion: @escaping (Result<SocialApp, Error>) -> Void) {
+//        var urlString = "https://api.letsbuildthatapp.com/appstore/social"
+//        guard let url = URL(string: urlString) else { return }
+//        fetchData(from: url) { result in
+//            switch result {
+//            case .success(let data):
+//                do {
+//                    let socialApp = try JSONDecoder().decode(SocialApp.self, from: data)
+//                    completion(.success(socialApp))
+//                } catch {
+//                    print("JSON decoding failed")
+//                    completion(.failure(ServiceError.decodingFailed(error)))
+//                }
+//            case .failure(let error):
+//                completion(.failure(error))
+//            }
+//        }
+//    }
+//}
 
 enum ServiceError: Error {
     case invalidURL

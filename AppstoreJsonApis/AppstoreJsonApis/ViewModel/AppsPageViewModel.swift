@@ -14,10 +14,16 @@ protocol AppsPageViewModelProtocol {
     var games: [AppsGroup] { get }  // Updated to non-optional
     
     func fetchGames()
+    func fetchSocialApps()
+    var onSocialAppsFetched: (() -> Void)? { get set }
+    var socialApps: [SocialApp] {get}
 }
 // MARK: - ViewModel
 class AppsPageViewModel: AppsPageViewModelProtocol {
+    var onSocialAppsFetched: (() -> Void)?
+    
     private(set) var games: [AppsGroup] = []
+    private(set) var socialApps:[SocialApp] = []
     
     // Closure for updating the view
     var onGamesFetched: (() -> Void)?
@@ -59,6 +65,19 @@ class AppsPageViewModel: AppsPageViewModelProtocol {
         dispatchGroup.notify(queue: .main){ [weak self] in
             self?.games = fetchedGames
             self?.onGamesFetched?()
+        }
+    }
+    func fetchSocialApps(){
+        service.fetchSocialApps(){ [weak self] result in
+            switch result {
+            case .success(let socialApps):
+                
+                self?.socialApps = socialApps
+                self?.onSocialAppsFetched?()
+            case .failure(let error):
+                break
+            }
+            
         }
     }
 }
