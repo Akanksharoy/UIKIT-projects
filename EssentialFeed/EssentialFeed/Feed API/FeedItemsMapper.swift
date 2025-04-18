@@ -2,7 +2,7 @@
 //  FeedItemsMapper.swift
 //  EssentialFeed
 //
-//  Created by Animesh on 06.04.2025.
+//  Created by Akanksha on 06.04.2025.
 //
 
 class FeedItemsMapper {

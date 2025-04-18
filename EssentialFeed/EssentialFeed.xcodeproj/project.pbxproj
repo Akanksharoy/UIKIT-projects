@@ -74,8 +74,8 @@
 			isa = PBXGroup;
 			children = (
 				22B100962D9CDF34007337B1 /* EssentialFeed */,
-				22B100A02D9CDF34007337B1 /* EssentialFeedTests */,
 				22B100952D9CDF34007337B1 /* Products */,
+				22B100A02D9CDF34007337B1 /* EssentialFeedTests */,
 			);
 			sourceTree = "<group>";
 		};

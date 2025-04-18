@@ -2,7 +2,7 @@
 //  RemoteFeedLoader.swift
 //  EssentialFeed
 //
-//  Created by Animesh on 05.04.2025.
+//  Created by Akanksha on 05.04.2025.
 //
 
 public final class RemoteFeedLoader: FeedLoader{

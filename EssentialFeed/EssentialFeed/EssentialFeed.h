@@ -2,7 +2,7 @@
 //  EssentialFeed.h
 //  EssentialFeed
 //
-//  Created by Animesh on 02.04.2025.
+//  Created by Akanksha on 02.04.2025.
 //
 
 #import <Foundation/Foundation.h>
