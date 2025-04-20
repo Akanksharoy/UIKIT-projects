@@ -5,7 +5,7 @@
 //  Created by Akanksha on 19.04.2025.
 //
 
-public class LocalFeedLoader {
+public final class LocalFeedLoader {
     private let store: FeedStore
         private let currentDate: () -> Date
         
@@ -39,15 +39,6 @@ private extension Array where Element == FeedItem {
     }
 }
 
-public protocol FeedStore {
-    typealias DeletionCompletion = (Error?) -> Void
-    typealias InsertionCompletion = (Error?) -> Void
-    func deleteCachedFeed(completion: @escaping DeletionCompletion)
-    func insert(_ items: [LocalFeedItem], timestamp: Date, completion: @escaping InsertionCompletion)
-    
-
-    
-}
 public struct LocalFeedItem: Equatable {
     public let id: UUID
     public let description: String?
