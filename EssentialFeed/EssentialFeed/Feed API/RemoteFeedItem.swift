@@ -2,7 +2,7 @@
 //  RemoteFeedItem.swift
 //  EssentialFeed
 //
-//  Created by Animesh on 19.04.2025.
+//  Created by Akanksha on 19.04.2025.
 //
 
 internal struct RemoteFeedItem: Decodable {
