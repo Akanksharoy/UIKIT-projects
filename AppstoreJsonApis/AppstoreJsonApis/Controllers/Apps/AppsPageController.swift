@@ -40,6 +40,9 @@ class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout
     func fetchSocialApps() {
         viewModel?.fetchSocialApps()
         viewModel?.onSocialAppsFetched = { [weak self] in
+            DispatchQueue.main.async {
+                print("Data fetched")
+            }
             
         }
     }

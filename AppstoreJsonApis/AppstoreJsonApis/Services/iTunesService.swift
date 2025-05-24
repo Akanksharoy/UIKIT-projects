@@ -54,7 +54,6 @@ class ITunesGameService: BaseService, ITunesGameServiceProtocol {
             case .success(let data):
                 do {
                     let appGroup = try JSONDecoder().decode(AppsGroup.self, from: data)
-//                    print(appGroup.feed.results.forEach({ print($0.name) }))
                     completion(.success(appGroup))
                 } catch {
                     print("JSON decoding failed")
@@ -85,29 +84,6 @@ class ITunesGameService: BaseService, ITunesGameServiceProtocol {
     }
 
 }
-//protocol SocialAppProtocol {
-//    func fetchSocialApps(completion: @escaping (Result<SocialApp, Error>) -> Void)
-//}
-//class SocialAppService: BaseService, SocialAppProtocol {
-//    func fetchSocialApps(completion: @escaping (Result<SocialApp, Error>) -> Void) {
-//        var urlString = "https://api.letsbuildthatapp.com/appstore/social"
-//        guard let url = URL(string: urlString) else { return }
-//        fetchData(from: url) { result in
-//            switch result {
-//            case .success(let data):
-//                do {
-//                    let socialApp = try JSONDecoder().decode(SocialApp.self, from: data)
-//                    completion(.success(socialApp))
-//                } catch {
-//                    print("JSON decoding failed")
-//                    completion(.failure(ServiceError.decodingFailed(error)))
-//                }
-//            case .failure(let error):
-//                completion(.failure(error))
-//            }
-//        }
-//    }
-//}
 
 enum ServiceError: Error {
     case invalidURL

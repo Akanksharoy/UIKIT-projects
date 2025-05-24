@@ -6,23 +6,6 @@
 //
 
 import UIKit
-extension UIImageView {
-    convenience init(cornerRadius: CGFloat) {
-        self.init(image: nil)
-        self.layer.cornerRadius = cornerRadius
-        self.clipsToBounds = true
-        self.contentMode = .scaleAspectFill
-        
-    }
-}
-extension UIButton {
-    convenience init(title: String) {
-        self.init(type: .system )
-        self.setTitle(title, for: .normal)
-    }
-}
-
-import UIKit
 
 class AppRowCell: UICollectionViewCell {
     
@@ -36,21 +19,24 @@ class AppRowCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         imageView.backgroundColor = .red
-        imageView.constrainHeight(constant: 64)
-        imageView.constrainWidth(constant: 64)
         getButton.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        getButton.constrainWidth(constant: 80)
-        getButton.constrainHeight(constant: 32)
         getButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        getButton.layer.cornerRadius = 32 / 2
+        getButton.layer.cornerRadius = 16
+        getButton.setContentHuggingPriority(.required, for: .horizontal)
         
-        let stackView = UIStackView(arrangedSubviews: [imageView, VerticalStackView(arrangedSubviews: [nameLabel, companyLabel], spacing: 4), getButton])
+        let labelsStack = VerticalStackView(arrangedSubviews: [nameLabel, companyLabel], spacing: 4)
+        
+        let stackView = UIStackView(arrangedSubviews: [imageView, labelsStack, getButton])
         stackView.spacing = 16
-        
         stackView.alignment = .center
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(stackView)
-        stackView.fillSuperview()
+        stackView.fillSuperview(padding: .init(top: 8, left: 0, bottom: 8, right: 16))
+        imageView.constrainHeight(to: stackView.heightAnchor, multiplier: 0.8)
+        imageView.constrainWidth(to: imageView.heightAnchor, multiplier: 1.0)
+        imageView.setContentHuggingPriority(.required, for: .horizontal)
+        imageView.setContentHuggingPriority(.required, for: .vertical)
     }
     
     required init?(coder aDecoder: NSCoder) {

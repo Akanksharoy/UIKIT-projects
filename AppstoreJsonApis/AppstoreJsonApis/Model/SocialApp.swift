@@ -6,6 +6,6 @@
 //
 
 import Foundation
-struct SocialApp: Decodable{
+struct SocialApp: Decodable {
     let id, name, imageUrl, tagline: String
 }
