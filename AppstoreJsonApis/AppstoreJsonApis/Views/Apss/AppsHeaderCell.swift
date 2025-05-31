@@ -28,6 +28,6 @@ class AppsHeaderCell: UICollectionViewCell {
     func configure(with app: SocialApp) {
         companyLabel.text = app.name
         titleLabel.text = app.tagline
-        imageView.sd_setImage(with: URL(string: app.imageUrl))        
+        imageView.sd_setImage(with: URL(string: app.imageUrl))
     }
 }

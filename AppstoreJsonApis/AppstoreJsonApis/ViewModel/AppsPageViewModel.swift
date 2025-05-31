@@ -67,4 +67,16 @@ class AppsPageViewModel: AppsPageViewModelProtocol {
             self?.onGamesFetched?()
         }
     }
+    func fetchSocialApps(){
+        service.fetchSocialApps(){ [weak self] result in
+            switch result {
+            case .success(let socialApps):
+                self?.socialApps = socialApps
+                self?.onSocialAppsFetched?()
+            case .failure(let error):
+                break
+            }
+            
+        }
+    }
 }

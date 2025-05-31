@@ -8,7 +8,7 @@
 import UIKit
 
 class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout {
-    
+    let dispatchGroup = DispatchGroup()
     let cellId = "id"
     let headerID = "headerID"
     private var viewModel: AppsPageViewModelProtocol?
@@ -20,30 +20,35 @@ class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout
         
         collectionView.register(AppsGroupCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.register(AppsPageHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
-        fetchGames()        
+        fetchInitialData()
+    }
+    func fetchInitialData() {
+        fetchGames()
+        fetchSocialApps()
+        dispatchGroup.notify(queue: .main) { [weak self] in
+            self?.collectionView.reloadData()
+        }
     }
     
     func fetchGames(){
+        dispatchGroup.enter()
         viewModel?.fetchGames()
         viewModel?.onGamesFetched = { [weak self] in
-            DispatchQueue.main.async {
-                self?.collectionView.reloadData()
-            }
+            self?.dispatchGroup.leave()
         }
         viewModel?.onError = { [weak self] error  in
-            print("Data fetch failed")
+            self?.dispatchGroup.leave()
         }
     }
     
     func fetchSocialApps() {
+        dispatchGroup.enter()
         viewModel?.fetchSocialApps()
         viewModel?.onSocialAppsFetched = { [weak self] in
-            DispatchQueue.main.async {
-                print("Data fetched")
-            }
-            
+            self?.dispatchGroup.leave()
         }
     }
+
     
     init(viewModel: AppsPageViewModelProtocol = AppsPageViewModel(service: ITunesGameService())){
         super.init()
@@ -56,9 +61,7 @@ class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath) as! AppsPageHeader
-        let headerViewModel = AppsHeaderHorizontalViewModel(service: ITunesGameService())
-        header.configure(with: headerViewModel)
-
+        header.configure(with: viewModel ?? AppsPageViewModel())
         return header
     }
     

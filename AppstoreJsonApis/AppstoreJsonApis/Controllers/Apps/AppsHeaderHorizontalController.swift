@@ -9,9 +9,9 @@ import UIKit
 class AppsHeaderHorizontalController: BaseListController, UICollectionViewDelegateFlowLayout {
 
     let cellID = "horizontalHeaderCell"
-    private var viewModel: AppsHeaderHorizontalViewModelProtocol
+    private var viewModel: AppsPageViewModelProtocol
 
-    init(viewModel: AppsHeaderHorizontalViewModelProtocol) {
+    init(viewModel: AppsPageViewModelProtocol) {
         self.viewModel = viewModel
         super.init()
     }
@@ -27,17 +27,17 @@ class AppsHeaderHorizontalController: BaseListController, UICollectionViewDelega
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
         }
-        bindViewModel()
-        viewModel.fetchSocialApps()
+//        bindViewModel()
+//        viewModel.fetchSocialApps()
     }
 
-    private func bindViewModel() {
-        viewModel.onSocialAppsUpdated = { [weak self] in
-            DispatchQueue.main.async {
-                self?.collectionView.reloadData()
-            }
-        }
-    }
+//    private func bindViewModel() {
+//        viewModel.onSocialAppsUpdated = { [weak self] in
+//            DispatchQueue.main.async {
+//                self?.collectionView.reloadData()
+//            }
+//        }
+//    }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.socialApps.count

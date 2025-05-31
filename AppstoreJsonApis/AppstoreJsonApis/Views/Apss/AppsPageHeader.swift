@@ -9,7 +9,7 @@ import UIKit
 class AppsPageHeader: UICollectionReusableView {
     var appsHeaderHorizontalController: AppsHeaderHorizontalController?
 
-    func configure(with viewModel: AppsHeaderHorizontalViewModelProtocol) {
+    func configure(with viewModel: AppsPageViewModelProtocol) {
         appsHeaderHorizontalController?.view.removeFromSuperview()
 
         let controller = AppsHeaderHorizontalController(viewModel: viewModel)
