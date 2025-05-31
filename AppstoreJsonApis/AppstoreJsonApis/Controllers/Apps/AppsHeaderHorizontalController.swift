@@ -2,13 +2,24 @@
 //  AppsHeaderController.swift
 //  AppstoreJsonApis
 //
-//  Created by Animesh on 18/08/24.
+//  Created by Akanksha on 18/08/24.
 //
-
 import UIKit
-class AppsHeaderHorizontalController: BaseListController, UICollectionViewDelegateFlowLayout{
+
+class AppsHeaderHorizontalController: BaseListController, UICollectionViewDelegateFlowLayout {
+
     let cellID = "horizontalHeaderCell"
-    var socialApps = [SocialApp]()
+    private var viewModel: AppsHeaderHorizontalViewModelProtocol
+
+    init(viewModel: AppsHeaderHorizontalViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
@@ -16,19 +27,31 @@ class AppsHeaderHorizontalController: BaseListController, UICollectionViewDelega
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
         }
+        bindViewModel()
+        viewModel.fetchSocialApps()
     }
+
+    private func bindViewModel() {
+        viewModel.onSocialAppsUpdated = { [weak self] in
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+            }
+        }
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.socialApps.count
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! AppsHeaderCell
+        let app = viewModel.socialApps[indexPath.item]
+        // cell.configure(with: app)
+        return cell
+    }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: view.frame.width - 48, height: view.frame.height)
     }
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return socialApps.count
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .init(top: 0, left: 0, bottom: 0, right: 0)
-    }
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
-        return cell
-    }
-    
 }
+

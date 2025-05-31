@@ -2,7 +2,7 @@
 //  SearchResultCollectionViewCell.swift
 //  AppstoreJsonApis
 //
-//  Created by Animesh on 20/06/24.
+//  Created by Akanksha on 20/06/24.
 //
 
 import UIKit

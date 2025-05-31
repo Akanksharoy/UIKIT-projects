@@ -2,7 +2,7 @@
 //  VerticalStackView.swift
 //  AppstoreJsonApis
 //
-//  Created by Animesh on 21/06/24.
+//  Created by Akanksha on 21/06/24.
 //
 import UIKit
 

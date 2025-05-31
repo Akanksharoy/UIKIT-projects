@@ -2,20 +2,20 @@
 //  AppsPageHeader.swift
 //  AppstoreJsonApis
 //
-//  Created by Animesh on 18/08/24.
+//  Created by Akanksha on 18/08/24.
 //
 
 import UIKit
 class AppsPageHeader: UICollectionReusableView {
-    let appsHeaderHorizontalController = AppsHeaderHorizontalController()
+    var appsHeaderHorizontalController: AppsHeaderHorizontalController?
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        addSubview(appsHeaderHorizontalController.view)
-        appsHeaderHorizontalController.view.fillSuperview()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func configure(with viewModel: AppsHeaderHorizontalViewModelProtocol) {
+        appsHeaderHorizontalController?.view.removeFromSuperview()
+
+        let controller = AppsHeaderHorizontalController(viewModel: viewModel)
+        appsHeaderHorizontalController = controller
+
+        addSubview(controller.view)
+        controller.view.fillSuperview()
     }
 }

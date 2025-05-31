@@ -2,7 +2,7 @@
 //  AppsHorizontalController.swift
 //  AppstoreJsonApis
 //
-//  Created by Animesh on 14/08/24.
+//  Created by Akanksha on 14/08/24.
 //
 import UIKit
 import Foundation

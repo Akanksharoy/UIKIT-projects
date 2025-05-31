@@ -2,7 +2,7 @@
 //  AppsPageViewModel.swift
 //  AppstoreJsonApis
 //
-//  Created by Animesh on 21/08/24.
+//  Created by Akanksha on 21/08/24.
 //
 
 import Foundation

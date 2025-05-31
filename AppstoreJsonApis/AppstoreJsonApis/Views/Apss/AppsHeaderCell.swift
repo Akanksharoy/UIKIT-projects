@@ -2,7 +2,7 @@
 //  AppsHeaderCell.swift
 //  AppstoreJsonApis
 //
-//  Created by Animesh on 18/08/24.
+//  Created by Akanksha on 18/08/24.
 //
 
 import UIKit

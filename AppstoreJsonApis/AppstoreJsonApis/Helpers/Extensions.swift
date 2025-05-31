@@ -2,7 +2,7 @@
 //  Extensions.swift
 //  AppstoreJsonApis
 //
-//  Created by Animesh on 16/08/24.
+//  Created by Akanksha on 16/08/24.
 //
 
 import UIKit

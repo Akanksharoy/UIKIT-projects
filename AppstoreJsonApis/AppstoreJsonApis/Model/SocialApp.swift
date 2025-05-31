@@ -2,7 +2,7 @@
 //  SocialApp.swift
 //  AppstoreJsonApis
 //
-//  Created by Animesh on 25/08/24.
+//  Created by Akanksha on 25/08/24.
 //
 
 import Foundation

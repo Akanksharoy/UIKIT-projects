@@ -2,7 +2,7 @@
 //  AppsGroup.swift
 //  AppstoreJsonApis
 //
-//  Created by Animesh on 19/08/24.
+//  Created by Akanksha on 19/08/24.
 //
 
 import Foundation

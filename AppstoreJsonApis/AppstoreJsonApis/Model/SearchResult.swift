@@ -2,7 +2,7 @@
 //  SearchResult.swift
 //  AppstoreJsonApis
 //
-//  Created by Animesh on 04/07/24.
+//  Created by Akanksha on 04/07/24.
 //
 struct SearchResult:Decodable {
     let resultCount: Int

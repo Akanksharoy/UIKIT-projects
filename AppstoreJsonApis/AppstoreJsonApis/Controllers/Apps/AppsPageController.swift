@@ -2,7 +2,7 @@
 //  AppsController.swift
 //  AppstoreJsonApis
 //
-//  Created by Animesh on 11/08/24.
+//  Created by Akanksha on 11/08/24.
 //
 
 import UIKit
@@ -58,6 +58,9 @@ class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath) as! AppsPageHeader
+        let headerViewModel = AppsHeaderHorizontalViewModel(service: ITunesGameService())
+        header.configure(with: headerViewModel)
+
         return header
     }
     
