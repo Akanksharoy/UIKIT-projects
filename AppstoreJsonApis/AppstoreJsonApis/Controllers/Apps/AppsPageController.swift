@@ -20,9 +20,7 @@ class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout
         
         collectionView.register(AppsGroupCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.register(AppsPageHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
-        fetchGames()
-        fetchSocialApps()
-        
+        fetchGames()        
     }
     
     func fetchGames(){

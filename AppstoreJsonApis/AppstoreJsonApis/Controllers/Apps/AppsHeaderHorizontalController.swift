@@ -46,7 +46,7 @@ class AppsHeaderHorizontalController: BaseListController, UICollectionViewDelega
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! AppsHeaderCell
         let app = viewModel.socialApps[indexPath.item]
-        // cell.configure(with: app)
+         cell.configure(with: app)
         return cell
     }
 
