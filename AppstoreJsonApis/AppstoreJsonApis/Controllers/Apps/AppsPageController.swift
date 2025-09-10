@@ -12,7 +12,7 @@ class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout
     let cellId = "id"
     let headerID = "headerID"
     private var viewModel: AppsPageViewModelProtocol?
-    
+//    let activityIndicator
     
     override func viewDidLoad() {
         super.viewDidLoad()
