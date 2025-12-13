@@ -49,8 +49,27 @@ final class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        navigationController?.setNavigationBarHidden(false, animated: false)
+
         viewModel.loadEmployees()
         reloadUI()
+    }
+
+    private func setupAddButton() {
+        let addButton = UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(addButtonTapped)
+        )
+        addButton.tintColor = .white
+        navigationItem.rightBarButtonItem = addButton
+    }
+
+    @objc
+    private func addButtonTapped() {
+        print("Add button tapped")
+        // Navigate to Add Employee screen later
     }
     
     func reloadUI() {
@@ -64,10 +83,38 @@ final class ViewController: UIViewController {
         title = "Employees"
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
-        
+        setupNavigationBar()
+        setupAddButton()
         setupTableView()
         setupEmptyView()
+   
     }
+    private func setupNavigationBar() {
+        title = "Employees"
+
+        let backgroundColor = UIColor(hex: "#3B3FC4")
+
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = backgroundColor
+
+        appearance.largeTitleTextAttributes = [
+            .foregroundColor: UIColor.white
+        ]
+
+        appearance.titleTextAttributes = [
+            .foregroundColor: UIColor.white
+        ]
+
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
+    }
+
+
     
     func setupTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -80,7 +127,7 @@ final class ViewController: UIViewController {
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -138,5 +185,18 @@ extension ViewController: UITableViewDelegate {
         }
         
         return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+}
+extension UIColor {
+    convenience init(hex: String) {
+        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        var int: UInt64 = 0
+        Scanner(string: hex).scanHexInt64(&int)
+
+        let r = CGFloat((int >> 16) & 0xFF) / 255
+        let g = CGFloat((int >> 8) & 0xFF) / 255
+        let b = CGFloat(int & 0xFF) / 255
+
+        self.init(red: r, green: g, blue: b, alpha: 1)
     }
 }
