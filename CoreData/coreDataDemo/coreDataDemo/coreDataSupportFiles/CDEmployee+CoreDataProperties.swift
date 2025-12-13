@@ -2,7 +2,7 @@
 //  CDEmployee+CoreDataProperties.swift
 //  coreDataDemo
 //
-//  Created by Animesh on 13.09.2025.
+//  Created by Akanksha on 13.09.2025.
 //
 //
 

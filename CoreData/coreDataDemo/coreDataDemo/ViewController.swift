@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  coreDataDemo
 //
-//  Created by Animesh on 10.09.2025.
+//  Created by Akanksha on 10.09.2025.
 //
 
 import UIKit
@@ -68,8 +68,8 @@ final class ViewController: UIViewController {
 
     @objc
     private func addButtonTapped() {
-        print("Add button tapped")
-        // Navigate to Add Employee screen later
+        let addVC = AddEmployeeViewController()
+        navigationController?.pushViewController(addVC, animated: true)
     }
     
     func reloadUI() {
