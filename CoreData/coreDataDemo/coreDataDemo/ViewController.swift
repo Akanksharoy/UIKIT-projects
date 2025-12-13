@@ -7,34 +7,136 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //createEmployee()
-//        fetchEmployee()
-        // Do any additional setup after loading the view.
+final class ViewController: UIViewController {
+    
+    // MARK: - UI
+    
+    private let tableView = UITableView()
+    
+    private let emptyView = EmptyView(
+        sfSymbolName: "person.2.slash",
+        title: "No Employees",
+        subtitle: "Employees added will appear here."
+    )
+    
+    // MARK: - Dependencies
+    
+    private let viewModel: EmployeeListViewModelProtocol
+    
+    // MARK: - Init
+    
+    init(viewModel: EmployeeListViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
     
-//    func createEmployee() {
-//        let employee = Employee(context: PersistentStorage.shared.context)
-//        employee.name = "Animesh"
-//        PersistentStorage.shared.saveContext()
-//    }
-//    
-//    func fetchEmployee() {
-//        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-//        debugPrint(path[0])
-//        do {
-//            guard let employees = try PersistentStorage.shared.context.fetch(Employee.fetchRequest()) as? [Employee] else {
-//                return
-//            }
-//            employees.forEach({debugPrint($0.name)})
-//        } catch {
-//            print("Error fetching data: \(error)")
-//        }
-//    }
-
-
+    // If this VC is loaded from a storyboard/nib, provide a default ViewModel wiring here.
+    required init?(coder: NSCoder) {
+        // Default dependency graph for storyboard usage
+        let repository = EmployeeDataRepository()
+        let vm = EmployeeListViewModel(repository: repository)
+        self.viewModel = vm
+        super.init(coder: coder)
+    }
+    
+    // MARK: - Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupUI()
+        reloadUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.loadEmployees()
+        reloadUI()
+    }
+    
+    func reloadUI() {
+        let isEmpty = viewModel.employees.isEmpty
+        emptyView.isHidden = !isEmpty
+        tableView.isHidden = isEmpty
+        tableView.reloadData()
+    }
+    
+    func setupUI() {
+        title = "Employees"
+        view.backgroundColor = .systemBackground
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        setupTableView()
+        setupEmptyView()
+    }
+    
+    func setupTableView() {
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(EmployeeCell.self, forCellReuseIdentifier: EmployeeCell.reuseID)
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.rowHeight = 72
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 76, bottom: 0, right: 0)
+        
+        view.addSubview(tableView)
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
+    func setupEmptyView() {
+        emptyView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(emptyView)
+        
+        NSLayoutConstraint.activate([
+            emptyView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            emptyView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            emptyView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            emptyView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
 }
 
+extension ViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewModel.employees.count
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: EmployeeCell.reuseID,
+            for: indexPath
+        ) as! EmployeeCell
+        
+        let employee = viewModel.employees[indexPath.row]
+        cell.configure(with: employee)
+        return cell
+    }
+}
+
+extension ViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView,
+                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+    -> UISwipeActionsConfiguration? {
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {
+            [weak self] _, _, completion in
+            
+            guard let self else { return }
+            
+            let employee = self.viewModel.employees[indexPath.row]
+            _ = self.viewModel.deleteEmployee(id: employee.id)
+            self.reloadUI()
+            completion(true)
+        }
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+}
