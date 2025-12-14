@@ -24,7 +24,7 @@ final class ProfileImageView: UIImageView {
     
     private func setupUI(){
         translatesAutoresizingMaskIntoConstraints = false
-        contentMode = .scaleAspectFill
+        contentMode = .scaleAspectFit
         clipsToBounds = true
         image = UIImage(systemName: "camera.fill")
         tintColor = .white

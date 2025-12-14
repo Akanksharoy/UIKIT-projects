@@ -2,99 +2,65 @@
 //  AddEmployeeViewController.swift
 //  coreDataDemo
 //
-//  Created by Animesh on 13.12.2025.
+//  Created by Akanksha on 13.12.2025.
 //
 
 import UIKit
 
 final class AddEmployeeViewController: UIViewController {
 
-    // MARK: - UI Components
+    private let contentView: AddEmployeeViewProtocol
 
-    private let profileImageView = ProfileImageView()
+    // MARK: - Initializer (Dependency Injection)
+    init(contentView: AddEmployeeViewProtocol = AddEmployeeView()) {
+        self.contentView = contentView
+        super.init(nibName: nil, bundle: nil)
+    }
 
-    private let nameTextField = RoundedTextField(
-        placeholder: "Name"
-    )
-
-    private let emailTextField = RoundedTextField(
-        placeholder: "Email",
-        keyboardType: .emailAddress
-    )
-
-    private let addButton = PrimaryButton(
-        title: "Add Employee"
-    )
-
-    private let stackView: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.spacing = 16
-        return stack
-    }()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     // MARK: - Lifecycle
 
+    override func loadView() {
+        view = contentView
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
-        setupActions()
+        setupNavigation()
+        bindActions()
     }
 }
+
 private extension AddEmployeeViewController {
 
-    func setupUI() {
+    func setupNavigation() {
         title = "Add Employee"
-        view.backgroundColor = .systemBackground
-
         navigationItem.largeTitleDisplayMode = .never
-
-        view.addSubview(stackView)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-
-        stackView.addArrangedSubview(profileImageView)
-        stackView.addArrangedSubview(nameTextField)
-        stackView.addArrangedSubview(emailTextField)
-        stackView.addArrangedSubview(addButton)
-
-        stackView.setCustomSpacing(24, after: profileImageView)
-        stackView.setCustomSpacing(32, after: emailTextField)
-
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24)
-        ])
-
-        // Center profile image
-        profileImageView.centerXAnchor.constraint(equalTo: stackView.centerXAnchor).isActive = true
-    }
-}
-private extension AddEmployeeViewController {
-
-    func setupActions() {
-        let tapGesture = UITapGestureRecognizer(
-            target: self,
-            action: #selector(profileImageTapped)
-        )
-        profileImageView.addGestureRecognizer(tapGesture)
-
-        addButton.addTarget(
-            self,
-            action: #selector(addButtonTapped),
-            for: .touchUpInside
-        )
     }
 
-    @objc
-    func profileImageTapped() {
+    func bindActions() {
+        contentView.onProfileImageTap = { [weak self] in
+            self?.presentImagePicker()
+        }
+
+        contentView.onAddButtonTap = { [weak self] in
+            self?.addEmployee()
+        }
+    }
+
+    func presentImagePicker() {
         print("Profile image tapped")
-        // Image picker will be added in next step
     }
 
-    @objc
-    func addButtonTapped() {
+    func addEmployee() {
+        let name = contentView.nameText
+        let email = contentView.emailText
+
         print("Add employee tapped")
-        // Validation + ViewModel logic in later step
+        print("Name:", name ?? "")
+        print("Email:", email ?? "")
     }
 }
