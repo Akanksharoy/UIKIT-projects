@@ -13,7 +13,6 @@ protocol AddEmployeeViewProtocol: UIView {
     var nameText: String? { get set }
     var emailText: String? { get set }
     
-    
     // Outputs (View → VC)
     var onProfileImageTap: (() -> Void)? { get set }
     var onAddButtonTap: (() -> Void)? { get set }
@@ -49,6 +48,7 @@ final class AddEmployeeView: UIView, AddEmployeeViewProtocol {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.spacing = 16
+        stack.alignment = .center // Center the avatar; we’ll give width constraints to fields/buttons
         return stack
     }()
     
@@ -80,29 +80,58 @@ final class AddEmployeeView: UIView, AddEmployeeViewProtocol {
 private extension AddEmployeeView {
     func setupUI() {
         backgroundColor = .systemBackground
+        
         addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Add arranged subviews
         stackView.addArrangedSubview(profileImageView)
         stackView.addArrangedSubview(nameTextField)
         stackView.addArrangedSubview(emailTextField)
         stackView.addArrangedSubview(addButton)
+        
+        // Custom spacing
         stackView.setCustomSpacing(24, after: profileImageView)
         stackView.setCustomSpacing(32, after: emailTextField)
+        
+        // Stack view constraints
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 32),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24) ])
-        profileImageView.centerXAnchor .constraint(equalTo: stackView.centerXAnchor) .isActive = true
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24)
+        ])
+        
+        // Profile image: fixed, centered by stack alignment
+        profileImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            profileImageView.heightAnchor.constraint(equalToConstant: 140),
+            profileImageView.widthAnchor.constraint(equalTo: profileImageView.heightAnchor)
+        ])
+        
+        // Ensure textfields and button expand to full width
+        nameTextField.translatesAutoresizingMaskIntoConstraints = false
+        emailTextField.translatesAutoresizingMaskIntoConstraints = false
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            nameTextField.widthAnchor.constraint(equalTo: stackView.widthAnchor),
+            emailTextField.widthAnchor.constraint(equalTo: stackView.widthAnchor),
+            addButton.widthAnchor.constraint(equalTo: stackView.widthAnchor)
+        ])
     }
 }
 
 private extension AddEmployeeView {
     func setupActions() {
         let tapGesture = UITapGestureRecognizer(
-            target: self, action: #selector(profileTapped) )
+            target: self, action: #selector(profileTapped)
+        )
         profileImageView.addGestureRecognizer(tapGesture)
-        addButton.addTarget( self, action: #selector(addTapped), for: .touchUpInside )
+        
+        addButton.addTarget(self, action: #selector(addTapped), for: .touchUpInside)
     }
+    
     @objc func profileTapped() { onProfileImageTap?() }
     @objc func addTapped() { onAddButtonTap?() }
 }
+
