@@ -12,6 +12,7 @@ protocol AddEmployeeViewProtocol: UIView {
     // Inputs (VC → View)
     var nameText: String? { get set }
     var emailText: String? { get set }
+    func setProfileImage(_ image: UIImage?)
     
     // Outputs (View → VC)
     var onProfileImageTap: (() -> Void)? { get set }
@@ -23,6 +24,9 @@ final class AddEmployeeView: UIView, AddEmployeeViewProtocol {
     // MARK: - UI Components
     
     let profileImageView = ProfileImageView()
+    func setProfileImage(_ image: UIImage?) {
+        profileImageView.imageView.image = image
+    }
     
     let nameTextField = RoundedTextField(
         placeholder: "Name"
@@ -123,15 +127,17 @@ private extension AddEmployeeView {
 
 private extension AddEmployeeView {
     func setupActions() {
-        let tapGesture = UITapGestureRecognizer(
-            target: self, action: #selector(profileTapped)
-        )
-        profileImageView.addGestureRecognizer(tapGesture)
+        profileImageView.onTap = { [weak self] in
+            self?.onProfileImageTap?()
+        }
         
         addButton.addTarget(self, action: #selector(addTapped), for: .touchUpInside)
     }
     
-    @objc func profileTapped() { onProfileImageTap?() }
+    @objc func profileTapped() {
+        print("Profile tapped")
+        onProfileImageTap?()
+    }
     @objc func addTapped() { onAddButtonTap?() }
 }
 

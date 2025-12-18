@@ -8,8 +8,8 @@
 import UIKit
 
 final class ProfileImageView: UIView {
-    
-    private let imageView = UIImageView()
+    var onTap: (() -> Void)?
+    let imageView = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -77,6 +77,7 @@ final class ProfileImageView: UIView {
             animate(scale: 0.96, alpha: 0.9)
         case .ended, .cancelled, .failed:
             animate(scale: 1.0, alpha: 1.0)
+            onTap?()
         default:
             break
         }

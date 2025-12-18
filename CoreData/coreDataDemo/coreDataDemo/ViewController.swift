@@ -68,8 +68,14 @@ final class ViewController: UIViewController {
 
     @objc
     private func addButtonTapped() {
-        let addVC = AddEmployeeViewController()
-        navigationController?.pushViewController(addVC, animated: true)
+        let vm = AddEditEmployeeViewModel(
+                mode: .add,
+                repository: viewModel.repository
+            )
+
+            let vc = AddEmployeeViewController(viewModel: vm)
+            navigationController?.pushViewController(vc, animated: true)
+        
     }
     
     func reloadUI() {
@@ -164,6 +170,17 @@ extension ViewController: UITableViewDataSource {
         let employee = viewModel.employees[indexPath.row]
         cell.configure(with: employee)
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let employee = viewModel.employees[indexPath.row]
+
+            let vm = AddEditEmployeeViewModel(
+                mode: .edit(employee),
+                repository: viewModel.repository
+            )
+
+            let vc = AddEmployeeViewController(viewModel: vm)
+            navigationController?.pushViewController(vc, animated: true)
     }
 }
 

@@ -10,6 +10,7 @@ import UIKit
 
 protocol EmployeeListViewModelProtocol {
     var employees: [Employee] { get }
+    var repository: EmployeeRepository { get }
     
     func loadEmployees()
     func addEmployee(name: String?, email: String?, profilePicture: Data?)
@@ -23,7 +24,7 @@ protocol EmployeeListViewModelProtocol {
 }
 
 final class EmployeeListViewModel: EmployeeListViewModelProtocol {
-    private let repository: EmployeeRepository
+    internal let repository: EmployeeRepository
     private(set) var employees: [Employee] = []
     
     init(repository: EmployeeRepository) {
