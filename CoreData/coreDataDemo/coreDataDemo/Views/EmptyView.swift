@@ -38,6 +38,7 @@ final class EmptyView: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .headline)
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = .label
         label.textAlignment = .center
         return label
@@ -46,6 +47,7 @@ final class EmptyView: UIView {
     private let subtitleLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .subheadline)
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = .secondaryLabel
         label.numberOfLines = 0
         label.textAlignment = .center
